@@ -7,7 +7,7 @@ open Microsoft.Xna.Framework.Input
 type Game1() as this =
     inherit Game ()
     let _graphics = new GraphicsDeviceManager(this)
-    let mutable _spriteBatch : SpriteBatch option = None
+    let mutable _spriteBatch = Unchecked.defaultof<_>
     
 
     do
@@ -18,7 +18,7 @@ type Game1() as this =
         base.Initialize ()
 
     override _.LoadContent () =
-        _spriteBatch <- new SpriteBatch (this.GraphicsDevice) |> Some
+        _spriteBatch <- new SpriteBatch (this.GraphicsDevice)
 
     override _.Update (gameTime) =
         if GamePad.GetState(PlayerIndex.One).Buttons.Back = ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) then
